@@ -1,0 +1,14 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "create new",  yield(:new) , id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Act",    ' ../../acts' %></li>
+          <li><%= link_to "Chapter",    ' ../../chapters' %></li>
+          <li><%= link_to "Topic", ' ../../topics' %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

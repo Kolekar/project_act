@@ -1,0 +1,28 @@
+<% provide(:title, 'Topic') %>
+<% provide(:new, 'topics/new') %>
+<h1>Listing Topics</h1>
+
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Chapter</th>
+    <th>Description</th>
+    
+  </tr>
+
+<% @topics.each do |topic| %>
+  <tr>
+    <td><%= topic.name %></td>
+    <td><%= topic.chapter.name rescue "Chapter Deleted "%></td>
+    <td><%= topic.description  %></td>
+    
+    <td><%= link_to 'Show', topic %></td>
+    <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+    <td><%= link_to 'Destroy', topic, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New topic', new_topic_path %>

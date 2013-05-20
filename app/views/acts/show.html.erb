@@ -1,0 +1,14 @@
+<% provide(:title, 'Act') %>
+<% provide(:new, 'acts/new') %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Act:</b>
+  <%= @act.name %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_act_path(@blog) %> |
+<%= link_to 'Back', acts_path %>

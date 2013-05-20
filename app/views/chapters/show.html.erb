@@ -1,0 +1,17 @@
+<% provide(:title, 'Chapter') %>
+<% provide(:new, 'chapters/new') %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @chapter.name %>
+</p>
+
+<p>
+  <b>Act</b>
+  <%= @chapter.act.name%>
+</p>
+
+
+<%= link_to 'Edit', edit_chapter_path(@chapter) %> |
+<%= link_to 'Back', chapters_path %>

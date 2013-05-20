@@ -1,0 +1,21 @@
+<% provide(:title, 'Topic') %>
+<% provide(:new, 'topics/new') %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @topic.name %>
+</p>
+<p>
+  <b>Chapter:</b>
+  <%= @topic.chapter.name %>
+</p>
+<p>
+  <b>Desc:</b>
+  <%= @topic.description %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>
