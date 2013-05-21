@@ -1,4 +1,5 @@
 ProjectAct::Application.routes.draw do
+  root :to => "acts#index"
   resources :topics
   resources :acts
   resources :chapters
