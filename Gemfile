@@ -5,7 +5,7 @@ gem 'bootstrap-sass', '2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'sqlite3' 
+#gem 'sqlite3' 
 
 group :production do
 	gem 'pg'
@@ -27,6 +27,11 @@ end
 
 gem 'jquery-rails'
 gem 'rack'
+
+# Gemfile
+gem 'rabl'
+# Also add either `oj` or `yajl-ruby` as the JSON parser
+gem 'oj'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

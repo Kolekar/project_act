@@ -3,21 +3,50 @@ class ActsController < ApplicationController
 	def index
     @acts = Act.all
    
+
+
     respond_to do |format|
       format.html # index.html.erb
 
-      format.json { render json: @acts }
+      format.json { 
+                    @act_hash=Hash.new
+             
+                    @string=" "
+                     @acts.each do |act|
+                            @string = act.name + "  " 
+                            @words = @string.split(/\W+/)
+                            @words.each do|word|
+                                 
+                                    
+                                   if @act_hash[word].blank? 
+                                     @act_hash[word]=[[0]=>act.id] 
+                                      @act_hash[word][0]=act.id 
+                               else
+                                 @act_hash[word][ @act_hash[word].length]=act.id   
+                                end
+                                     
+
+                            end
+                    end
+                 
+        render json: @act_hash 
+
+
+      }
       format.xml # index.html.erb
     end
   end
 
+def show
+@act=Act.find(params[:id])
 
+ respond_to do |format|
+      format.html # index.html.erb
 
-
-
-
- 
-
+      format.json 
+      format.xml # index.html.erb
+    end
+end
   # GET /acts/new
   # GET /acts/new.json
   def new

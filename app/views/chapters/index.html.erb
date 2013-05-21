@@ -16,10 +16,14 @@
     <td><%= link_to 'Show', chapter %></td>
     <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
     <td><%= link_to 'Destroy', chapter, confirm: 'Are you sure?', method: :delete %></td>
+    <td><a href=topics/new?chapter=<%=chapter.id%>>Add Topic</a></td>
+     <td><a href=topics?chapter=<%=chapter.id%>>Show Topic</a></td>
+      <td><a href=chapters/<%=chapter.id%>.json>Json</a></td>
   </tr>
 <% end %>
 </table>
-
+<br />
+<a href=chapters.json>Search Json</a>
 <br />
 
 <%= link_to 'New chapter', new_chapter_path %>

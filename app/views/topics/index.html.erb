@@ -19,10 +19,12 @@
     <td><%= link_to 'Show', topic %></td>
     <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
     <td><%= link_to 'Destroy', topic, confirm: 'Are you sure?', method: :delete %></td>
+    <td><a href=topics/<%=topic.id%>.json>Json</a></td>
   </tr>
 <% end %>
 </table>
-
+<br />
+<a href=topics.json>Search Json</a>
 <br />
 
 <%= link_to 'New topic', new_topic_path %>

@@ -1,14 +1,41 @@
 class ChaptersController < ApplicationController
 
 	def index
+
+    if !params[:act].blank? 
+      
+      @chapters= Chapter.find_all_by_act_id( params[:act] )
+    else
     @chapters = Chapter.all
+  end
    
+
     respond_to do |format|
       format.html # index.html.erb
 
-      format.json { render json: @chapters }
-      format.xml # index.html.erb
-    end
+      format.json { 
+
+                     @act_hash=Hash.new
+                     @string=" "
+                     @chapters.each do |chapter|
+                            @string = chapter.name + "  " 
+                            @words = @string.split(/\W+/)
+                            @words.each do|word|
+                                 
+                                    
+                                   if @act_hash[word].blank? 
+                                     @act_hash[word]=[[0]=>chapter.id] 
+                                      @act_hash[word][0]=chapter.id 
+                               else
+                                 @act_hash[word][ @act_hash[word].length]=chapter.id   
+                                end
+                                     
+
+                            end
+                    end
+
+      render json: @act_hash }
+      end
   end
 
   # GET /chapters/1
@@ -19,14 +46,20 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @chapter }
+      format.json 
     end
   end
 
   # GET /chapters/new
   # GET /chapters/new.json
   def new
+    if !params[:act].blank? 
+      
+      @acts= Act.find_all_by_id( params[:act] )
+    else
     @acts=Act.all
+  end
+   
     @chapter = Chapter.new
    
     respond_to do |format|

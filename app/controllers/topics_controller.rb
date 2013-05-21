@@ -2,12 +2,40 @@
 class TopicsController < ApplicationController
   
   def index
+if !params[:chapter].blank? 
+      
+      @topics= Topic.find_all_by_chapter_id( params[:chapter] )
+    else
     @topics = Topic.all
+  end
+
+    
    
     respond_to do |format|
       format.html # index.html.erb
 
-      format.json { render json: @topics }
+      format.json { 
+
+                     @topic_hash=Hash.new
+             
+                    @string=" "
+                     @topics.each do |topic|
+                            @string = topic.name + "  " + topic.description
+                            @words = @string.split(/\W+/)
+                            @words.each do|word|
+                                 
+                                    
+                                   if @topic_hash[word].blank? 
+                                     @topic_hash[word]=[[0]=>topic.id] 
+                                      @topic_hash[word][0]=topic.id 
+                               else
+                                 @topic_hash[word][ @topic_hash[word].length]=topic.id   
+                                end
+                                     
+
+                            end
+                    end
+        render json: @topic_hash }
       format.xml # index.html.erb
     end
   end
@@ -27,7 +55,15 @@ class TopicsController < ApplicationController
   # GET /topics/new
   # GET /topics/new.json
   def new
+    if !params[:chapter].blank? 
+      
+      @chapters= Chapter.find_all_by_id( params[:chapter] )
+    else
     @chapters=Chapter.all
+  end
+
+
+   
     @topic = Topic.new
    
     respond_to do |format|

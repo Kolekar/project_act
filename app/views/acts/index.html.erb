@@ -8,15 +8,22 @@
    
   </tr>
 
+
+
 <% @acts.each do |act| %>
   <tr>
     <td><%= act.name %></td>
     <td><%= link_to 'Edit', edit_act_path(act) %></td>
     <td><%= link_to 'Destroy', act, confirm: 'Are you sure?', method: :delete %></td>
+    <td><a href=chapters/new?act=<%=act.id%>>Add Chapter</a></td>
+     <td><a href=chapters?act=<%=act.id%>>Show Chapter</a></td>
+     <td><a href=acts/<%=act.id%>.json>Json</a></td>
   </tr>
 <% end %>
 </table>
 
+<br />
+<a href=acts.json>Search Json</a>
 <br />
 
 <%= link_to 'New act', new_act_path %>
