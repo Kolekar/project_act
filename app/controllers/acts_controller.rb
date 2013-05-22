@@ -1,5 +1,7 @@
 class ActsController < ApplicationController
-  
+  def search
+    
+  end
 	def index
     @acts = Act.all
    
@@ -33,7 +35,7 @@ class ActsController < ApplicationController
 
 
       }
-      format.xml # index.html.erb
+      
     end
   end
 
@@ -42,9 +44,37 @@ def show
 
  respond_to do |format|
       format.html # index.html.erb
+    if !params[:search].blank? 
+     
 
+      format.json { 
+                    @act_hash=Hash.new
+             
+                    @string=" "
+                     @act.topics.each do |act|
+                            @string = act.name + "  " + act.description
+                            @words = @string.split(/\W+/)
+                            @words.each do|word|
+                                 
+                                    
+                                   if @act_hash[word].blank? 
+                                     @act_hash[word]=[[0]=>act.id] 
+                                      @act_hash[word][0]=act.id 
+                               else
+                                 @act_hash[word][ @act_hash[word].length]=act.id   
+                                end
+                                     
+
+                            end
+                    end
+                 
+        render json: @act_hash 
+
+
+     }
+    else
       format.json 
-      format.xml # index.html.erb
+      end
     end
 end
   # GET /acts/new
